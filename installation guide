@@ -26,7 +26,7 @@ exit
 //----------------------------------------------------------------------------------------------
 mkdir /home/dhismgr/config
 cd /home/dhismgr/config
-nano hibernate.properties
+nano dhis.config
 
 	# Hibernate SQL dialect
 	hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
@@ -65,7 +65,8 @@ nano dhis2/bin/setenv.sh
   install the war into tomcat
 //----------------------------------------------------------------------------------------------
 
-
+//download a war file
+https://www.dhis2.org/downloads
 
 // copy war into webapps folder
 cp ROOT.war dhis2/webapps/ROOT.war
