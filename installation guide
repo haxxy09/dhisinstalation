@@ -77,6 +77,10 @@ cp ROOT.war dhis2/webapps/ROOT.war
 
 dhis2/bin/startup.sh
 
+//--------------------------------------------------------------------------------------------
+
+http://localhost:8080
+
 
 
 to check the logs
