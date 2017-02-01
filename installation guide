@@ -37,7 +37,7 @@ nano dhis.config
 	# Database username
 	hibernate.connection.username = dhismgr
 	# Database password
-	hibernate.connection.password = (password)
+	hibernate.connection.password = (databse password)
 	hibernate.hbm2ddl.auto = update
 
 //----------------------------------------------------------------------------------------------
