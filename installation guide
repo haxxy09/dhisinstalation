@@ -1,0 +1,96 @@
+################################################################################################
+# Installing DHIS2
+################################################################################################
+
+//----------------------------------------------------------------------------------------------
+  install postgressql9.3 and create database
+//----------------------------------------------------------------------------------------------
+
+// install postgresql9.3
+sudo apt-get install postgresql-9.3			- install postgresql
+
+//su into postgres
+sudo su postgres
+
+// create a peer postgres server user: dhismgr
+createuser -SDRP dhismgr
+
+//create database dhis2 owned by dhismgr
+createdb -O dhismgr dhis2
+
+#exit su postgres 
+exit
+
+//----------------------------------------------------------------------------------------------
+  create the hibernate.properties file
+//----------------------------------------------------------------------------------------------
+mkdir /home/dhismgr/config
+cd /home/dhismgr/config
+nano hibernate.properties
+
+	# Hibernate SQL dialect
+	hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
+	# JDBC driver class
+	hibernate.connection.driver_class = org.postgresql.Driver
+	# JDBC driver connection URL
+	hibernate.connection.url = jdbc:postgresql:dhis2
+	# Database username
+	hibernate.connection.username = dhismgr
+	# Database password
+	hibernate.connection.password = (password)
+	hibernate.hbm2ddl.auto = update
+
+//----------------------------------------------------------------------------------------------
+  install Java
+//----------------------------------------------------------------------------------------------
+
+sudo add-apt-repository ppa:webupd8team/java		
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+java -version
+
+//----------------------------------------------------------------------------------------------
+  install tomcat
+//----------------------------------------------------------------------------------------------
+
+sudo apt-get install tomcat7-user
+tomcat7-instance-create dhis2
+nano dhis2/bin/setenv.sh
+
+	export JAVA_HOME='/usr/lib/jvm/java-8-oracle/'
+	export JAVA_OPTS='-Xmx1500m -Xms1000m'
+	export DHIS2_HOME='/home/dhismgr/config'
+
+//----------------------------------------------------------------------------------------------
+  install the war into tomcat
+//----------------------------------------------------------------------------------------------
+
+
+
+// copy war into webapps folder
+cp ROOT.war dhis2/webapps/ROOT.war
+
+//----------------------------------------------------------------------------------------------
+  run dhis2
+//----------------------------------------------------------------------------------------------
+
+dhis2/bin/startup.sh
+
+
+
+to check the logs
+//---------------------------------------------------------------------------------------------
+tail - f dhis2/logs/catalina.out
+
+//------------------------------------------------------------------------------------------------
+reference
+//-----------------------------------------------------------------------------------------------
+
+dhis implementation manual chaper 8
+
+https://docs.dhis2.org/master/en/implementer/html/installation.html
+
+
+
+
+
